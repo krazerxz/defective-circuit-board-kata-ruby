@@ -1,5 +1,9 @@
 class Workbench
-  def just_a_placeholder?
-    true
+  def initialize(circuit_boards)
+    @circuit_boards = circuit_boards
+  end
+
+  def bad_cards
+    @circuit_boards
   end
 end

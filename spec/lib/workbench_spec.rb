@@ -1,7 +1,11 @@
 require 'spec_helper'
 
 describe Workbench do
-  it 'is just a placeholder' do
-    expect(subject).to be_just_a_placeholder
+  let(:circuit_boards) { BoardGenerator.new_set }
+  subject              { described_class.new(circuit_boards) }
+
+  it 'returns the cards that are faulty' do
+    faulty_circuit_boards = circuit_boards.reject(&:working?)
+    expect(subject.bad_cards).to eq faulty_circuit_boards
   end
 end
