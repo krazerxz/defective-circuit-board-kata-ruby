@@ -1,0 +1,2 @@
+class BoardTester
+end
