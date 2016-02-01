@@ -5,3 +5,5 @@ Documentation:
   Enabled: false
 Metrics/LineLength:
   Max: 120
+TrivialAccessors:
+  Enabled: false
