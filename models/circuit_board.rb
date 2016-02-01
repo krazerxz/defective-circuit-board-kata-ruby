@@ -1,9 +1,9 @@
 class CircuitBoard
-  def initialize(faulty:)
-    @faulty = faulty
+  def initialize(working:)
+    @working = working
   end
 
-  def faulty?
-    @faulty
+  def working?
+    @working
   end
 end
