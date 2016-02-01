@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe Board::Tester do
+describe 'the circuit board tester operates as expected' do
   let(:working_circuit_board) { CircuitBoard.new(working: true) }
   let(:faulty_circuit_board)  { CircuitBoard.new(working: false) }
 
-  subject { described_class }
+  subject { Board::Tester }
 
   before do
     srand(100)
