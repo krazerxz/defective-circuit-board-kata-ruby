@@ -7,4 +7,3 @@ class BoardTester
     return boards.incorrectly_identify_one_working_board_as_faulty if boards.defective_boards == 0
   end
 end
-

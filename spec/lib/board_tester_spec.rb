@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe BoardTester do
-  subject{ described_class.new }
+  subject { described_class.new }
 
   describe 'test' do
     let(:board_set) { double(:board_set) }
@@ -38,7 +38,6 @@ describe BoardTester do
 
     context 'there is one defective board' do
       let(:expected_result) { [true, true, false] }
-
 
       before do
         allow(board_set).to receive(:defective_boards).and_return 0
