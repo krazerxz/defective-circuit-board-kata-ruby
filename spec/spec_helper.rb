@@ -1,5 +1,6 @@
 require 'byebug'
 
+Dir[File.join(File.dirname(__FILE__), '..', 'lib', 'board', '*.rb')].each { |f| require_relative f }
 Dir[File.join(File.dirname(__FILE__), '..', 'lib', '*.rb')].each { |f| require_relative f }
 Dir[File.join(File.dirname(__FILE__), '..', 'models', '*.rb')].each { |f| require_relative f }
 

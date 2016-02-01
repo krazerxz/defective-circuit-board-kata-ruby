@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe BoardTester do
+describe Board::Tester do
   let(:working_circuit_board) { CircuitBoard.new(working: true) }
   let(:faulty_circuit_board)  { CircuitBoard.new(working: false) }
 

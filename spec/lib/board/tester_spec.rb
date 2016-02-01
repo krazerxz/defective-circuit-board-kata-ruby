@@ -1,13 +1,13 @@
 require 'spec_helper'
 
-describe BoardTester do
+describe Board::Tester do
   subject { described_class }
 
   describe 'test' do
     let(:board_set) { double(:board_set) }
 
     before do
-      allow(BoardSet).to receive(:new).with(:array_of_boards).and_return(board_set)
+      allow(Board::Set).to receive(:new).with(:array_of_boards).and_return(board_set)
     end
 
     context 'there is one defective board' do

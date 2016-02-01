@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Workbench do
-  let(:circuit_boards) { BoardGenerator.new_set }
+  let(:circuit_boards) { Board::Generator.new_set }
   subject              { described_class.new(circuit_boards) }
 
   xit 'returns the cards that are faulty' do
