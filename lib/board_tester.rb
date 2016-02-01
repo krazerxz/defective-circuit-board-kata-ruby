@@ -1,5 +1,5 @@
 class BoardTester
-  def test(array_of_boards)
+  def self.test(array_of_boards)
     boards = BoardSet.new(array_of_boards)
 
     return boards.correct_identification_of_all_boards             if boards.defective_boards == 1

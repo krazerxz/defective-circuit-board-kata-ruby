@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe BoardTester do
-  subject { described_class.new }
+  subject { described_class }
 
   describe 'test' do
     let(:board_set) { double(:board_set) }

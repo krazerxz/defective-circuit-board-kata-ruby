@@ -4,7 +4,7 @@ describe BoardTester do
   let(:working_circuit_board) { CircuitBoard.new(working: true) }
   let(:faulty_circuit_board)  { CircuitBoard.new(working: false) }
 
-  subject { described_class.new }
+  subject { described_class }
 
   before do
     srand(100)
