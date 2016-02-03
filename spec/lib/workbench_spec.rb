@@ -5,7 +5,8 @@ describe Workbench do
   subject              { described_class.new(circuit_boards) }
 
   xit 'returns the cards that are faulty' do
-    faulty_circuit_boards = circuit_boards.reject(&:working?)
-    expect(subject.bad_cards).to eq faulty_circuit_boards
+    faulty_circuit_boards = circuit_boards.reject(&:working?).sort_by(&:object_id)
+    my_answer = subject.bad_cards.sort_by(&:object_id)
+    expect(my_answer).to eq faulty_circuit_boards
   end
 end
