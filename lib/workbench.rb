@@ -4,34 +4,42 @@ class Workbench
   end
 
   def bad_cards
-    j_board = @circuit_boards.last
+    boards = Board::Helper.new(@circuit_boards)
 
-    x_y_z_results = []
-    @circuit_boards.each_slice(3) do |boards|
-      x_y_z_results << Board::Tester.test(boards) if boards.count == 3
-    end
-
-    false_indexes = []
-    x_y_z_results.flatten.each_with_index{ |result, index| false_indexes << index if result == false }
-    x_y_z_boards = []
-    @circuit_boards.each_with_index{|board, index| x_y_z_boards << board if false_indexes.include?(index) }
+    x_board = test_and_return_faulty_board [boards.a_board, boards.b_board, boards.c_board]
+    y_board = test_and_return_faulty_board [boards.d_board, boards.e_board, boards.f_board]
+    z_board = test_and_return_faulty_board [boards.g_board, boards.h_board, boards.i_board]
 
     # faulty
-    q_board = test_and_return_faulty_board x_y_z_boards
+    q_board = test_and_return_faulty_board [x_board, y_board, z_board]
 
-    a_b_j_boards = @circuit_boards.take(2) + [j_board]
     # maybe faulty
-    r_board = test_and_return_faulty_board a_b_j_boards
+    r_board = test_and_return_faulty_board [boards.a_board, boards.b_board, boards.j_board]
 
-    r_y_z_boards = [r_board] + x_y_z_boards.last(2)
-    w_board = test_and_return_faulty_board r_y_z_boards
+    w_board = test_and_return_faulty_board [r_board, y_board, z_board]
 
-    [q_board, r_board, w_board]
+    [q_board, w_board]
   end
 
   private
 
   def test_and_return_faulty_board boards
     boards[Board::Tester.test(boards).find_index(false)]
+  end
+end
+
+class Board::Helper
+  def initialize all_boards
+    @boards = all_boards
+    define_methods
+  end
+
+  def define_methods
+    board_names = %w(a b c d e f g h i j)
+    @boards.each_with_index do |board, index|
+      define_singleton_method("#{board_names[index]}_board") do
+        @boards[index]
+      end
+    end
   end
 end
