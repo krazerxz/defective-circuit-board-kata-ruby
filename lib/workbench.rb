@@ -6,17 +6,42 @@ class Workbench
   def bad_cards
     boards = Board::Helper.new(@circuit_boards)
 
-    x_board = test_and_return_faulty_board [boards.a_board, boards.b_board, boards.c_board]
-    y_board = test_and_return_faulty_board [boards.d_board, boards.e_board, boards.f_board]
-    z_board = test_and_return_faulty_board [boards.g_board, boards.h_board, boards.i_board]
+    a_b_c_boards = [boards.a_board, boards.b_board, boards.c_board] # Test 1
+    d_e_f_boards = [boards.d_board, boards.e_board, boards.f_board] # Test 2
+    g_h_i_boards = [boards.g_board, boards.h_board, boards.i_board] # Test 3
+
+    x_board = test_and_return_faulty_board a_b_c_boards
+    y_board = test_and_return_faulty_board d_e_f_boards
+    z_board = test_and_return_faulty_board g_h_i_boards
 
     # faulty
-    q_board = test_and_return_faulty_board [x_board, y_board, z_board]
+    q_board = test_and_return_faulty_board [x_board, y_board, z_board] # Test 4
+
+    set_to_test = []
+
+    # Find which set the initial faulty board game from
+    [a_b_c_boards, d_e_f_boards, g_h_i_boards].each do |board_set|
+      set_to_test = board_set if board_set.include? q_board
+    end.flatten
+
+
+    # q is definitely faulty, we can now disregard this and build out next test, less the one we discovered
+    set_to_test = set_to_test - [q_board] + [boards.j_board]
+
 
     # maybe faulty
-    r_board = test_and_return_faulty_board [boards.a_board, boards.b_board, boards.j_board]
+    r_board = test_and_return_faulty_board set_to_test # test 5
 
-    w_board = test_and_return_faulty_board [r_board, y_board, z_board]
+    set_to_test = []
+    [a_b_c_boards, d_e_f_boards, g_h_i_boards].each do |board_set|
+      set_to_test = board_set if board_set.include? r_board
+    end
+
+    final_test = [r_board, x_board, y_board] if set_to_test == g_h_i_boards
+    final_test = [r_board, x_board, z_board] if set_to_test == d_e_f_boards
+    final_test = [r_board, y_board, z_board] if set_to_test == a_b_c_boards
+
+    w_board = test_and_return_faulty_board final_test # Test 6
 
     [q_board, w_board]
   end
