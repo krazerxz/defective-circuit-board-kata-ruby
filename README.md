@@ -24,7 +24,7 @@ A circuit board is what you're trying to test. I've provided a Board::Generator 
 ## Board::Generator ##
 The generator returns an array of 10 circuit boards for you to use when devising your solution.
 
-> Board::Generator.new_set
+> Board::Generator.new_set #=> [#<CircuitBoard>,#<CircuitBoard>...]
 
 ## BoardTester ##
 This is your circuit board tester! It has the limitations defined above.
@@ -50,9 +50,13 @@ I've not made a kata before. Let me know what you think, if you enjoy it, if you
 
 # How do I begin? #
 > git clone git@github.com:krazerxz/defective-circuit-board-kata-ruby.git
+
 > cd defective-circuit-board-kata-ruby
+
 > gem install bundler
+
 > bundle install
+
 > rspec
 
 Have fun!
