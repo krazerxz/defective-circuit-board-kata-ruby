@@ -1,6 +1,6 @@
 # Defective Circuit Board Ruby Kata
 
-I've converted the 'Defective Circuit Board Puzzle' from [ datagenics ]( http://datagenetics.com/blog/january32016/index.html ) into a Ruby kata. The text below is directly from the datagenics site, I couldn't have put it better myself:
+I've converted the 'Defective Circuit Board Puzzle' from [ datagenetics ]( http://datagenetics.com/blog/january32016/index.html ) into a Ruby kata. The text below is directly from the datagenetics site, I couldn't have put it better myself:
 
 > Let’s imagine that I have ten old computer circuit boards. Eight are in perfect condition, and two are defective.
 > I want to determine which are the two defective boards, and the only tool I have is an antiquated testing machine. To use the machine, I have to insert exactly three circuit boards, then push a test button. The test machine always gives a result and identifies a 'defective' board. Knowing what I do about the peculiarities of this test machine, here’s what could happen:
