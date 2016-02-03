@@ -24,10 +24,8 @@ class Workbench
       set_to_test = board_set if board_set.include? q_board
     end.flatten
 
-
     # q is definitely faulty, we can now disregard this and build out next test, less the one we discovered
     set_to_test = set_to_test - [q_board] + [boards.j_board]
-
 
     # maybe faulty
     r_board = test_and_return_faulty_board set_to_test # test 5
@@ -48,22 +46,24 @@ class Workbench
 
   private
 
-  def test_and_return_faulty_board boards
+  def test_and_return_faulty_board(boards)
     boards[Board::Tester.test(boards).find_index(false)]
   end
 end
 
-class Board::Helper
-  def initialize all_boards
-    @boards = all_boards
-    define_methods
-  end
+class Board
+  class Helper
+    def initialize(all_boards)
+      @boards = all_boards
+      define_methods
+    end
 
-  def define_methods
-    board_names = %w(a b c d e f g h i j)
-    @boards.each_with_index do |board, index|
-      define_singleton_method("#{board_names[index]}_board") do
-        @boards[index]
+    def define_methods
+      board_names = %w(a b c d e f g h i j)
+      @boards.each_with_index do |_board, index|
+        define_singleton_method("#{board_names[index]}_board") do
+          @boards[index]
+        end
       end
     end
   end
