@@ -12,14 +12,14 @@ describe 'the circuit board tester operates as expected' do
 
   describe 'test' do
     context 'exactly one circuit board is defective' do
-      it 'correctly identifyies a faulty board' do
+      it 'correctly identifies a faulty board' do
         outcome = subject.test([working_circuit_board, working_circuit_board, faulty_circuit_board])
         expect(outcome).to eq [true, true, false]
       end
     end
 
     context 'two circuit boards are defective' do
-      it 'correctly identifyies, at random, a faulty board' do
+      it 'correctly identifies, at random, a faulty board' do
         outcome = subject.test([working_circuit_board, faulty_circuit_board, faulty_circuit_board])
         expect(outcome).to eq [true, true, false]
       end

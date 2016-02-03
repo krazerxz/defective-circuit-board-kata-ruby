@@ -3,6 +3,10 @@ class CircuitBoard
     @working = working
   end
 
+  def inspect
+    "#<CircuitBoard:#{object_id}>"
+  end
+
   def working?
     @working
   end
