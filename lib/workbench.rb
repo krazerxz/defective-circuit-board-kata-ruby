@@ -6,24 +6,32 @@ class Workbench
   def bad_cards
     j_board = @circuit_boards.last
 
-    results = []
+    x_y_z_results = []
     @circuit_boards.each_slice(3) do |boards|
-      results << Board::Tester.test(boards) if boards.count == 3
+      x_y_z_results << Board::Tester.test(boards) if boards.count == 3
     end
 
     false_indexes = []
-    results.flatten.each_with_index{ |result, index| false_indexes << index if result == false }
+    x_y_z_results.flatten.each_with_index{ |result, index| false_indexes << index if result == false }
     x_y_z_boards = []
     @circuit_boards.each_with_index{|board, index| x_y_z_boards << board if false_indexes.include?(index) }
 
-    q_board = x_y_z_boards[Board::Tester.test(x_y_z_boards).find_index(false)]
+    # faulty
+    q_board = test_and_return_faulty_board x_y_z_boards
 
     a_b_j_boards = @circuit_boards.take(2) + [j_board]
-    r_board = a_b_j_boards[Board::Tester.test(a_b_j_boards).find_index(false)]
+    # maybe faulty
+    r_board = test_and_return_faulty_board a_b_j_boards
 
     r_y_z_boards = [r_board] + x_y_z_boards.last(2)
-    w_board = r_y_z_boards[Board::Tester.test(r_y_z_boards).find_index(false)]
+    w_board = test_and_return_faulty_board r_y_z_boards
 
-    [q_board, w_board]
+    [q_board, r_board, w_board]
+  end
+
+  private
+
+  def test_and_return_faulty_board boards
+    boards[Board::Tester.test(boards).find_index(false)]
   end
 end
